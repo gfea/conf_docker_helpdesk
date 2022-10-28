@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  nginx:
+    container_name: nginx_helpdesk
+    # lokasi source code
+    build:
+      context: .
+      dockerfile: .docker/web.dockerfile
+    # path untuk source di dalam docker
+    volumes:
+      - ./:/var/www
+    image: webserver_laravel:1.0
+    ports:
+      - "80:80"
+
+  app:
+    container_name: helpdesk
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: gfea/helpdesk:latest
+    volumes:
+      - ./:/var/www
